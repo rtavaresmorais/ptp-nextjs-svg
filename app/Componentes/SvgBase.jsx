@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
-const SvgBase = ({ width = 200, height = 200, children,onClick ,jsonData }) => {
+const SvgBase = ({ config }) => {
+  const { width, height, jsonData, onClick, children } = config;
+
   const [hint, setHint] = useState(""); // Armazena o ID do polígono
   const [position, setPosition] = useState({ x: 0, y: 0 }); // Armazena a posição do mouse
 
@@ -12,7 +14,7 @@ const SvgBase = ({ width = 200, height = 200, children,onClick ,jsonData }) => {
     console.log(`Você clicou no polígono com ID: ${id}`);
 
     if (id && onClick) { // Se a função `onClick` existir, chama-a
-      onClick(e);
+      onClick(id);
     
     }
   };

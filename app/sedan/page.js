@@ -9,6 +9,23 @@ export default function Sedan() {
     const [jsonData, setJsonData] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    const cliqueTeste= (id) => {
+        alert(id);
+        switch (id) {
+          case "estofamento":
+            console.log("Executando ação para Estofamento");
+            break;
+          case "portas":
+            console.log("Executando ação para Portas");
+            break;
+          default:
+            console.log(`ID não reconhecido: ${id}`);
+            break;
+        }
+      };
+    
+
+
     useEffect(() => {
         // Fetch do JSON
         fetch(
@@ -32,7 +49,14 @@ export default function Sedan() {
 
     return (
         <div>
-            <SvgBase width={350} height={350} jsonData={jsonData}>
+            <SvgBase
+                config={{
+                    width: 350,
+                    height: 350,
+                    jsonData: jsonData,
+                    onClick: cliqueTeste,
+                    children: <SvgConv width="100%" height="100%" />,
+                }}    >
                 <SvgConv width="100%" height="100%" />
             </SvgBase>
         </div>
