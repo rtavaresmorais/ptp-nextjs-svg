@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SvgBase = ({ width = 200, height = 200, children,onClick  }) => {
+const SvgBase = ({ width = 200, height = 200, children,onClick ,jsonData }) => {
   const [hint, setHint] = useState(""); // Armazena o ID do polígono
   const [position, setPosition] = useState({ x: 0, y: 0 }); // Armazena a posição do mouse
 
@@ -9,11 +9,11 @@ const SvgBase = ({ width = 200, height = 200, children,onClick  }) => {
     const id = e.target.id;
     if (e.target.id && e.target.id.includes("image")) { return; }
 
+    console.log(`Você clicou no polígono com ID: ${id}`);
+
     if (id && onClick) { // Se a função `onClick` existir, chama-a
       onClick(e);
-
-
-      console.log(`Você clicou no polígono com ID: ${id}`);
+    
     }
   };
 
@@ -21,8 +21,9 @@ const SvgBase = ({ width = 200, height = 200, children,onClick  }) => {
   const handleMouseMove = (e) => {
     const id = e.target.id;
     if (e.target.id && e.target.id.includes("image")) { return; }
-    if (id) {
-      setHint(id); // Atualiza o ID exibido
+    const grupo = jsonData.grupos.find((item) => item.id === id); // Encontra o item correspondente no JSON
+    if (grupo) {
+      setHint(grupo.descricao); 
       setPosition({ x: e.clientX + 10, y: e.clientY + 10 }); // Ajusta a posição relativa ao cursor
       e.target.style.opacity = 0.5; // Destaca o polígono com opacidade reduzida
     }
@@ -54,7 +55,8 @@ const SvgBase = ({ width = 200, height = 200, children,onClick  }) => {
             zIndex: 1000, // Garante que esteja acima de outros elementos
           }}
         >
-          ID: {hint}
+           {hint}
+       
         </div>
       )}
 

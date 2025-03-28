@@ -1,5 +1,5 @@
 import * as React from "react";
-const SvgTesteSvgConv = (props) => (
+const SvgConv = (props) => (
   <svg
   //  width="100%"
    // height="100%"
@@ -165,4 +165,4 @@ const SvgTesteSvgConv = (props) => (
     </g>
   </svg>
 );
-export default SvgTesteSvgConv;
+export default SvgConv;

@@ -9,7 +9,13 @@ export default function Orcamento() {
       <p>Bem-vindo à página de orçamento!</p>
       <Link href="/">
         <button style={{ marginTop: "20px", padding: "10px 20px", cursor: "pointer" }}>
-          Voltar para a Página Principal
+          Voltar
+        </button>
+      </Link>
+      <br />
+      <Link href="/sedan">
+        <button style={{ marginTop: "20px", padding: "10px 20px", cursor: "pointer" }}>
+          Sedan
         </button>
       </Link>
 
