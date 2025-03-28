@@ -16,9 +16,13 @@ export default function Sedan() {
 
 
     const cliqueTeste = (id) => {
+        setSubgrupos([]);
+
+        if (id !="estofamento") { return; } // 
+        console.log(`Grupo selecionado: ${id}`);
         setSelectedGrupo(id); // Define o grupo selecionado
         // Faz o fetch dos subgrupos com base no grupo clicado
-        fetch(`https://gist.githubusercontent.com/rtavaresmorais/c2fef1297d762741bcb35f3436d6a637/raw/3e041e53265a45f61d1a2e497aa05f98be0a4e4e/subgrupo.json`)
+        fetch(`https://gist.githubusercontent.com/rtavaresmorais/c2fef1297d762741bcb35f3436d6a637/raw/dfea84c545524b8f7d595f5927e7e6b1d4de5ade/subgrupo.json`)
             //  fetch(`URL_DOS_SUBGRUPOS?grupoId=${id}`)
             .then((response) => response.json())
             .then((data) => setSubgrupos(data.subgrupos))
