@@ -23,6 +23,7 @@ const SvgBase = ({ config }) => {
   const handleMouseMove = (e) => {
     const id = e.target.id;
     if (e.target.id && e.target.id.includes("image")) { return; }
+    if (!jsonData)  { return; }
     const grupo = jsonData.grupos.find((item) => item.id === id); // Encontra o item correspondente no JSON
     if (grupo) {
       setHint(grupo.descricao); 
@@ -67,7 +68,7 @@ const SvgBase = ({ config }) => {
         width={width}
         height={height}
         xmlns="http://www.w3.org/2000/svg"
-        style={{ border: "1px solid black", cursor: "pointer" }}
+        style={{ border: "0px solid black", cursor: "pointer" }}
       >
         {/* Aplica os eventos SOMENTE nos filhos */}
         {React.Children.map(children, (child) =>

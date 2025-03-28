@@ -4,26 +4,47 @@ import React, { useState, useEffect } from "react";
 
 import SvgBase from '../Componentes/SvgBase';
 import SvgConv from '../Componentes/SvgConv';
+import SubGrupoCombo from '../Componentes/SubGrupoCombo';
 
 export default function Sedan() {
     const [jsonData, setJsonData] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [subgrupos, setSubgrupos] = useState([]);
 
-    const cliqueTeste= (id) => {
-        alert(id);
-        switch (id) {
-          case "estofamento":
-            console.log("Executando ação para Estofamento");
-            break;
-          case "portas":
-            console.log("Executando ação para Portas");
-            break;
-          default:
-            console.log(`ID não reconhecido: ${id}`);
-            break;
-        }
-      };
-    
+    const [selectedGrupo, setSelectedGrupo] = useState("");
+    const [selectedSubgrupo, setSelectedSubgrupo] = useState("");
+
+
+    const cliqueTeste = (id) => {
+        setSelectedGrupo(id); // Define o grupo selecionado
+        // Faz o fetch dos subgrupos com base no grupo clicado
+        fetch(`https://gist.githubusercontent.com/rtavaresmorais/c2fef1297d762741bcb35f3436d6a637/raw/3e041e53265a45f61d1a2e497aa05f98be0a4e4e/subgrupo.json`)
+            //  fetch(`URL_DOS_SUBGRUPOS?grupoId=${id}`)
+            .then((response) => response.json())
+            .then((data) => setSubgrupos(data.subgrupos))
+            .catch((error) => console.error("Erro ao buscar subgrupos:", error));
+    };
+
+    const handleSubgrupoSelect = (id) => {
+        setSelectedSubgrupo(id); // Define o subgrupo selecionado
+        console.log(`Subgrupo selecionado: ${id}`);
+        // Navegue ou busque as peças correspondentes aqui
+    };
+
+
+    /*
+     switch (id) {
+         case "estofamento":
+             console.log("Executando ação para Estofamento");
+             break;
+         case "portas":
+             console.log("Executando ação para Portas");
+             break;
+         default:
+             console.log(`ID não reconhecido: ${id}`);
+             break;
+     }
+ };*/
 
 
     useEffect(() => {
@@ -48,7 +69,9 @@ export default function Sedan() {
     }, []); // Executa apenas na montagem
 
     return (
-        <div>
+        <div style={{ margin: "15px" }}>
+
+            <h4>Clique para selecionar o grupo</h4>
             <SvgBase
                 config={{
                     width: 350,
@@ -59,6 +82,10 @@ export default function Sedan() {
                 }}    >
                 <SvgConv width="100%" height="100%" />
             </SvgBase>
+            {subgrupos.length > 0 && (
+                <SubGrupoCombo subgrupos={subgrupos} onSubgrupoSelect={handleSubgrupoSelect} />
+            )}
+
         </div>
     );
 }  

@@ -4,7 +4,8 @@ import Link from "next/link";
 
 export default function Orcamento() {
   return (
-    <div>
+    <div style={{ margin: "25px" }}>
+
       <h1>Página de Orçamento</h1>
       <p>Bem-vindo à página de orçamento!</p>
       <Link href="/">
